@@ -5,7 +5,7 @@
 # Site
 title: kylin's blog
 subtitle: 'from 2022-04-26'
-description: 'make little progress everyday!'
+description: 'Make Little Progress Everyday!'
 keywords: 
 author: kylin
 language: zh-CN
@@ -105,3 +105,12 @@ deploy:
   type: git
   repo: git@github.com:Alenryuichi/Alenryuichi.github.io.git
   branch: master
+
+
+
+#local search
+local_search:
+  path: search.xml
+  field: post
+  content: true
+  template: search.xml
