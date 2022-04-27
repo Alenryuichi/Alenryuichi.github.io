@@ -77,7 +77,7 @@ katex:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: \img\favicon.ico
+favicon: /img/favicon.ico
 
 # Avatar (頭像)
 avatar:
@@ -632,7 +632,7 @@ aside:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/xxxxxx
+      link: https://github.com/Alenryuichi
   card_announcement:
     enable: true
     content: This is my Blog
