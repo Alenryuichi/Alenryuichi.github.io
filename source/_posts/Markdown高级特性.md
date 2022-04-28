@@ -26,14 +26,14 @@ aplayer:
 highlight_shrink:
 aside:
 ---
-# 高级语法
-## 数学公式
+# 1. 高级语法
+## 1.1. 数学公式
 1. 行内公式 \$公式\$
 2. 行间公式 \$$公式\$$  
 
 符号速查可参考[Markdown数学符号速查表](https://www.cnblogs.com/mengsuenyan/p/12614058.html)
 
-## 流程图
+## 1.2. 流程图
 ``` markdown
 st=>start: 开始
 op1=>operation: 操作
@@ -55,7 +55,7 @@ st->op1->c
 c(yes)->e
 c(no)->op1
 ```
-## ToDo List
+## 1.3. ToDo List
 ```markdown
 - [] 未处理1
 - [] 未处理2
@@ -68,15 +68,17 @@ c(no)->op1
 - [x] 已处理1
 
   
-  
-## 序列图
+
+## 1.4. 序列图
 ```seq
 A->B: hello?
 Note right of B: B thinks
 B->A: hello!
 ```  
-
-## 甘特图
+  
+  
+  
+## 1.5. 甘特图
 ```gantt         
        dateFormat  YYYY-MM-DD   
        title 使用mermaid语言定制甘特图
