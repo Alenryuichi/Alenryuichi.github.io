@@ -276,7 +276,7 @@ addtoany:
 comments:
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo/Giscus
-  use:  Valine,Disqus
+  use:  Valine
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
@@ -316,9 +316,9 @@ gitalk:
 # valine
 # https://valine.js.org
 valine:
-  appId: # leancloud application app id
-  appKey: # leancloud application app key
-  avatar: monsterid # gravatar style https://valine.js.org/#/avatar
+  appId: WxiXDuynzRVm4DGKTpdMxRs1-9Nh9j0Va # leancloud application app id
+  appKey: yGK4vKrga3AEU5e8Uf42dUU8 # leancloud application app key
+  avatar: robohash # gravatar style https://valine.js.org/#/avatar
   serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
   bg: # valine background
   visitor: false
@@ -463,8 +463,8 @@ google_adsense:
 # --------------------------------------
 
 site_verification:
-  # - name: google-site-verification
-  #   content: xxxxxx
+   - name: google-site-verification
+     content: YNQaYD78sp9o-wJuFJHxNPE1P3G7W6KCsfc6acLAyO0
   # - name: baidu-site-verification
   #   content: xxxxxxx
 
