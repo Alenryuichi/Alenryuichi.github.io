@@ -67,18 +67,8 @@ c(no)->op1
 - [x] 已处理1
 - [x] 已处理1
 
-  
+## 1.4. 甘特图  
 
-## 1.4. 序列图
-```seq
-A->B: hello?
-Note right of B: B thinks
-B->A: hello!
-```  
-  
-  
-  
-## 1.5. 甘特图
 ```gantt         
        dateFormat  YYYY-MM-DD   
        title 使用mermaid语言定制甘特图
@@ -88,3 +78,15 @@ B->A: hello!
        待完成任务1               :         des3, after des2, 5d
        待完成任务2              :         des4, after des3, 5d
 ```
+
+## 1.5. 序列图  
+
+```seq
+A->B: hello?
+Note right of B: B thinks
+B->A: hello!
+```    
+
+  
+  
+  
