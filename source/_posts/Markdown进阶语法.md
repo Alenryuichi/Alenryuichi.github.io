@@ -86,18 +86,31 @@ aside:
 ## 1.5. 注脚
 在需要添加注脚的文字后加上脚注名字[^注脚名字],称为加注。 然后在文本的任意位置(一般在最后)添加脚注，脚注前必须有对应的脚注名字。  
 示范如下：
-> 注意需要添加空格！
-```markdown
-脚注演示段落[^1]，需要演示一下脚注的使用方法[^2]  
-  
-[^1]: 脚注1  
-[^2]: 脚注2
+> 注意需要添加空格！   
+```
+basic footnote[\^1]  
+here is an inline footnote[\^2]   (inline footnote)    
+and another one[\^3]    
+and another one[\^4]    
+
+[\^1]: basic footnote content   
+[\^3]: paragraph
+footnote
+content    
+[\^4]: footnote content with some [markdown](https://en.wikipedia.org/wiki/Markdown) 
 ```
 
-脚注演示段落[^1]，需要演示一下脚注的使用方法[^2]  
-  
-[^1]: 脚注1  
-[^2]: 脚注2
+basic footnote[^1]  
+here is an inline footnote[^2]   (inline footnote)    
+and another one[^3]    
+and another one[^4]    
+
+[^1]: basic footnote content   
+[^3]: paragraph
+footnote
+content    
+[^4]: footnote content with some [markdown](https://en.wikipedia.org/wiki/Markdown)  
+
 ## 1.6. 背景色
 ```markdown
 <table><tr><td bgcolor=orange>背景色是：orange</td></tr></table>

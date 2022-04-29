@@ -96,6 +96,8 @@ ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+plugins:
+  - hexo-footnotes
 ## Themes: https://hexo.io/themes/
 # theme: next 
 theme: butterfly
@@ -103,8 +105,10 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:Alenryuichi/Alenryuichi.github.io.git
-  branch: master
+  repository:
+    github: git@github.com:Alenryuichi/Alenryuichi.github.io.git,master
+    coding: git@e.coding.net:alenryuichi/alenryuichi/alenryuichi.git,master
+
 
 
 
@@ -114,3 +118,9 @@ local_search:
   field: post
   content: true
   template: search.xml
+
+#sitemap:
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
