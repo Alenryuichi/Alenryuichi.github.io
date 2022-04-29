@@ -7,7 +7,7 @@ sticky:
 tags:
   - Markdown
 categories:
-  - Tutorial
+  - 博客技术
 keywords:
 description: 高级特性：数学公式、流程图、ToDo List、序列图、甘特图
 top_img:

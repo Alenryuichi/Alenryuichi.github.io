@@ -7,7 +7,7 @@ sticky:
 tags:
   - Markdown
 categories:
-  - Tutorial
+  - 博客技术
 keywords:
 description: 基本语法：标题、段落、区块引用、超链接、图片、有（无）序列表、分隔线、基础字体特效与表格
 top_img:

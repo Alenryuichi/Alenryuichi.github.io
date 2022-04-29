@@ -7,7 +7,7 @@ sticky:
 tags:
   - Hexo
 categories:
-  - Tutorial
+  - 博客技术
 keywords:
 description: 介绍了hexo的使用方法及markdown部分语法
 top_img:

@@ -7,7 +7,7 @@ sticky:
 tags:
   - Markdown
 categories:
-  - Tutorial
+  - 博客技术
 keywords:
 description: 进阶语法：换行、缩进、特殊符号、字体特效、注脚、背景色与emoji颜色等
 top_img:
