@@ -107,7 +107,6 @@ deploy:
   type: git
   repository:
     github: git@github.com:Alenryuichi/Alenryuichi.github.io.git,master
-    coding: git@e.coding.net:alenryuichi/alenryuichi/alenryuichi.git,master
 
 
 
