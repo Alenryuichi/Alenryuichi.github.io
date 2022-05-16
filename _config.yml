@@ -110,7 +110,6 @@ deploy:
 
 
 
-
 #local search
 local_search:
   path: search.xml
@@ -123,3 +122,5 @@ sitemap:
   path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
+
+
