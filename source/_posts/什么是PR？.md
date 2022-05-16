@@ -10,7 +10,7 @@ keywords:
 description:
 top_img:
 comments:
-cover:
+cover: https://s1.ax1x.com/2022/05/16/OhiCTK.png
 toc_number:
 toc_style_simple:
 copyright:
