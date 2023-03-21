@@ -48,15 +48,23 @@ git clone git@xxxxx.git
 #安装package.json中的依赖
 npm install
 ```
-### 4. 测试hexo博客
+### 4. hexo博客测试与部署
 ```bash
-#清除部署缓存
+# 清除部署缓存
 hexo clean
-#生成静态文件  
+# 生成静态文件  
 hexo g
-#在localhost部署      
+# 在localhost部署      
 hexo s      
+# 将生成的静态文件部署到github的master分支上
+hexo d
 ```
+
 进入hexo博客预览静态页面效果。
+
+### 5. 如何将博客分发到不同平台
+- [利用GitHook实现博客园文章的备份和自动发布](https://blog.csdn.net/weixin_30876945/article/details/97546788)
+
+
 
 有问题可以在评论区提出。
