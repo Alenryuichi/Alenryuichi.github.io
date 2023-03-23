@@ -109,6 +109,47 @@ closes #123
 3. 预览文章：`hexo server`
 4. 发布文章：`hexo deploy`
 
+### 文章技巧
+
+1. 图片
+使用以下代码来添加图片：
+
+```
+<img src="图片链接" alt="图片描述">
+```
+
+其中，`src` 表示图片的链接，`alt` 表示图片的描述或替换文本（如果图片无法显示）。
+
+举个例子：
+
+```
+<div style="width: 50%;"> 
+  <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" alt="一棵树">
+</div>
+```
+
+这将在你的网页上插入一张来自 Pixabay 的树的图片。
+
+2. 视频
+
+使用以下代码来添加视频：
+
+```html
+<video controls> 
+  <source src="视频链接" type="视频类型">
+</video>
+```
+
+其中，`src` 表示视频的链接，`type` 表示视频的类型。`controls` 属性会在视频下方添加控制条。
+
+举个例子(视频自适应网页大小)：
+
+```html
+<video controls width="100%" height="auto">
+  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+</video>
+```
+
 ### 其他命令
 
 - 生成静态文件：`hexo generate` 或 `hexo g`
