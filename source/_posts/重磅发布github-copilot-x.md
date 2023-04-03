@@ -8,12 +8,8 @@ tags:
   - copilot
 categories:
   - AI
-keywords:
-  - GitHub Copilot X
-  - AI助手
-  - 开发生命周期
-  - 聊天式界面
-  - 命令行工具
+  - copilot
+keywords: GitHub Copilot X , AI助手 , 开发生命周期 , 聊天式界面 , 命令行工具
 description: GitHub Copilot X是一款基于OpenAI的GPT-4模型的AI助手，可以在整个开发生命周期中提供帮助。它包括GitHub Copilot Chat、Copilot for Pull Requests、GitHub Copilot for Docs和GitHub Copilot CLI四个部分，分别提供聊天式界面、自动生成Pull Request的描述、文档查询和命令行工具等功能。无论是哪个部分，都具有很强的实用性和便利性，是未来软件开发的重要工具。
 top_img:
 comments:

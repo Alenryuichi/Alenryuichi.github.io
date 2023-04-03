@@ -6,7 +6,7 @@
 
 ### Git 分支规范
 
-- `master`：主分支，用于发布稳定版本，不可直接修改。
+- `hexo`：主分支，用于发布稳定版本，不可直接修改。
 - `develop`：开发分支，用于开发新功能、修复 bug，不可直接修改。
 - `feature-*`：功能分支，用于新功能的开发，从 `develop` 分支分出，完成后合并回 `develop` 分支。
 - `bugfix-*`：修复分支，用于修复 bug，从 `develop` 分支分出，完成后合并回 `develop` 分支。
@@ -104,10 +104,12 @@ closes #123
 
 ### 编写文章
 
-1. 创建文章：`hexo new "My First Post"`
+1. 创建文章：`hexo new "My First Post"`, 会在`source/_posts`创建一个md文件
 2. 在 `source/_posts` 目录下编辑文章，使用 Markdown 语法。
-3. 预览文章：`hexo server`
-4. 发布文章：`hexo deploy`
+3. 清除静态文件: `hexo c`
+4. 生成静态文件: `hexo g`
+5. localhost预览文章：`hexo s`
+6. 发布文章：`hexo deploy`
 
 ### 文章技巧
 
