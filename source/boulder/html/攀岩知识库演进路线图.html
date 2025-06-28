@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>攀岩知识库演进路线图</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #2c3e50;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .phase {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .phase-left {
+            left: 0;
+        }
+
+        .phase-right {
+            left: 50%;
+        }
+
+        .phase-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .phase-left .phase-content {
+            margin-right: 20px;
+            border-right: 5px solid #3498db;
+        }
+
+        .phase-right .phase-content {
+            margin-left: 20px;
+            border-left: 5px solid #3498db;
+        }
+
+        .phase-title {
+            font-weight: bold;
+            color: #3498db;
+            margin-top: 0;
+        }
+
+        .timeline-date {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tech-list li {
+            padding: 5px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .metrics-table th, .metrics-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .metrics-table th {
+            background-color: #f2f2f2;
+        }
+
+        .risk-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .risk-table th, .risk-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .risk-table th {
+            background-color: #f2f2f2;
+        }
+
+        .conclusion {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+
+            .phase {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .phase-right {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>攀岩知识库演进路线图</h1>
+        <p>四个阶段实现从基础术语检索到多模态支持的完整演进</p>
+    </div>
+
+    <div class="timeline">
+        <div class="phase phase-left">
+            <div class="phase-content">
+                <div class="timeline-date">第1阶段 (0-3个月)</div>
+                <h2 class="phase-title">基础术语检索</h2>
+                <p>构建攀岩术语基础数据库，实现高效关键词检索功能。</p>
+                <ul class="tech-list">
+                    <li><strong>技术栈:</strong> Golang, MySQL, Gin框架</li>
+                    <li><strong>数据结构:</strong> 优化表设计，添加全文索引</li>
+                    <li><strong>API设计:</strong> RESTful API，支持术语CRUD操作</li>
+                    <li><strong>搜索优化:</strong> MySQL全文索引，基础分词</li>
+                    <li><strong>用户体验:</strong> 简单搜索界面，关键词高亮</li>
+                </ul>
+                <p><strong>效果预估:</strong></p>
+                <table class="metrics-table">
+                    <tr>
+                        <th>指标</th>
+                        <th>当前状态</th>
+                        <th>阶段目标</th>
+                        <th>提升</th>
+                    </tr>
+                    <tr>
+                        <td>查询响应时间</td>
+                        <td>&lt;500ms</td>
+                        <td>&lt;300ms</td>
+                        <td>-40%</td>
+                    </tr>
+                    <tr>
+                        <td>检索准确率</td>
+                        <td>65%</td>
+                        <td>80%</td>
+                        <td>+23%</td>
+                    </tr>
+                    <tr>
+                        <td>系统吞吐量</td>
+                        <td>200 QPS</td>
+                        <td>500 QPS</td>
+                        <td>+150%</td>
+                    </tr>
+                    <tr>
+                        <td>数据完整性</td>
+                        <td>基础术语覆盖</td>
+                        <td>核心攀岩术语完整收录</td>
+                        <td>全面覆盖</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="phase phase-right">
+            <div class="phase-content">
+                <div class="timeline-date">第2阶段 (3-6个月)</div>
+                <h2 class="phase-title">向量检索增强</h2>
+                <p>引入向量数据库，实现语义检索能力，提升用户体验。</p>
+                <ul class="tech-list">
+                    <li><strong>技术栈:</strong> Golang, MySQL, Gin, Milvus/FAISS</li>
+                    <li><strong>嵌入模型:</strong> BERT或Sentence-BERT中文攀岩术语模型</li>
+                    <li><strong>检索架构:</strong> 混合检索(关键词+向量相似度)</li>
+                    <li><strong>数据预处理:</strong> 术语向量化，建立索引</li>
+                    <li><strong>性能优化:</strong> 向量检索优化，结果融合算法</li>
+                </ul>
+                <p><strong>效果预估:</strong></p>
+                <table class="metrics-table">
+                    <tr>
+                        <th>指标</th>
+                        <th>当前状态</th>
+                        <th>阶段目标</th>
+                        <th>提升</th>
+                    </tr>
+                    <tr>
+                        <td>语义检索准确率</td>
+                        <td>N/A</td>
+                        <td>85%</td>
+                        <td>全新能力</td>
+                    </tr>
+                    <tr>
+                        <td>模糊查询能力</td>
+                        <td>有限</td>
+                        <td>强</td>
+                        <td>全新能力</td>
+                    </tr>
+                    <tr>
+                        <td>查询响应时间</td>
+                        <td>&lt;300ms</td>
+                        <td>&lt;400ms</td>
+                        <td>+33%</td>
+                    </tr>
+                    <tr>
+                        <td>相关性排序</td>
+                        <td>简单关键词匹配</td>
+                        <td>语义相似度排序</td>
+                        <td>显著提升</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="phase phase-left">
+            <div class="phase-content">
+                <div class="timeline-date">第3阶段 (6-10个月)</div>
+                <h2 class="phase-title">生成式问答</h2>
+                <p>引入大语言模型，实现自然语言问答，提升知识获取效率。</p>
+                <ul class="tech-list">
+                    <li><strong>技术栈:</strong> Golang, Gin, 大语言模型(LLM)</li>
+                    <li><strong>模型选择:</strong> LLaMA-7B/13B中文微调版本</li>
+                    <li><strong>提示工程:</strong> 攀岩领域专用prompt模板</li>
+                    <li><strong>检索增强:</strong> 结合向量检索的RAG架构</li>
+                    <li><strong>对话管理:</strong> 支持多轮对话，上下文理解</li>
+                </ul>
+                <p><strong>效果预估:</strong></p>
+                <table class="metrics-table">
+                    <tr>
+                        <th>指标</th>
+                        <th>当前状态</th>
+                        <th>阶段目标</th>
+                        <th>提升</th>
+                    </tr>
+                    <tr>
+                        <td>问答准确率</td>
+                        <td>N/A</td>
+                        <td>75%</td>
+                        <td>全新能力</td>
+                    </tr>
+                    <tr>
+                        <td>问题理解能力</td>
+                        <td>N/A</td>
+                        <td>支持复杂问法</td>
+                        <td>全新能力</td>
+                    </tr>
+                    <tr>
+                        <td>回答丰富度</td>
+                        <td>简单文本</td>
+                        <td>结构化回答，包含图片、步骤等</td>
+                        <td>显著提升</td>
+                    </tr>
+                    <tr>
+                        <td>用户体验</td>
+                        <td>传统搜索</td>
+                        <td>类聊天体验</td>
+                        <td>全新交互模式</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="phase phase-right">
+            <div class="phase-content">
+                <div class="timeline-date">第4阶段 (10-15个月)</div>
+                <h2 class="phase-title">多模态支持</h2>
+                <p>支持图片、视频等多媒体内容，实现全方位攀岩知识呈现。</p>
+                <ul class="tech-list">
+                    <li><strong>技术栈:</strong> Golang, Gin, CLIP, FFmpeg</li>
+                    <li><strong>图像处理:</strong> 物体识别，动作捕捉分析</li>
+                    <li><strong>视频处理:</strong> 关键帧提取，动作序列分析</li>
+                    <li><strong>多模态检索:</strong> 跨模态理解与检索</li>
+                    <li><strong>存储方案:</strong> 分布式文件存储，CDN加速</li>
+                </ul>
+                <p><strong>效果预估:</strong></p>
+                <table class="metrics-table">
+                    <tr>
+                        <th>指标</th>
+                        <th>当前状态</th>
+                        <th>阶段目标</th>
+                        <th>提升</th>
+                    </tr>
+                    <tr>
+                        <td>多媒体内容支持</td>
+                        <td>无</td>
+                        <td>全面支持</td>
+                        <td>全新能力</td>
+                    </tr>
+                    <tr>
+                        <td>视觉问答能力</td>
+                        <td>N/A</td>
+                        <td>支持图像内容问答</td>
+                        <td>全新能力</td>
+                    </tr>
+                    <tr>
+                        <td>知识呈现方式</td>
+                        <td>纯文本</td>
+                        <td>多媒体富文本</td>
+                        <td>显著提升</td>
+                    </tr>
+                    <tr>
+                        <td>用户参与度</td>
+                        <td>中等</td>
+                        <td>高</td>
+                        <td>显著提升</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="conclusion">
+        <h2>演进路线总结</h2>
+        <p>攀岩知识库的演进路线从基础术语检索开始，逐步发展到向量检索增强、生成式问答，最终实现多模态支持。每个阶段都有明确的技术目标和预期效果，整体演进周期约15个月。</p>
+        <p><strong>关键里程碑:</strong></p>
+        <ol>
+            <li>第3个月：完成基础术语检索系统，API稳定运行</li>
+            <li>第6个月：实现语义检索能力，大幅提升查询精度</li>
+            <li>第10个月：推出生成式问答功能，用户体验显著提升</li>
+            <li>第15个月：支持多媒体内容，成为全方位攀岩知识平台</li>
+        </ol>
+        <p><strong>技术风险与应对:</strong></p>
+        <ul>
+            <li>大模型训练数据不足：采用远程监督和主动学习方法扩充数据</li>
+            <li>多模态处理性能挑战：使用缓存和异步处理机制优化响应速度</li>
+            <li>模型泛化能力：持续收集用户反馈，迭代优化模型</li>
+        </ul>
+    </div>
+</body>
+</html>

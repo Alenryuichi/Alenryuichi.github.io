@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS 攀岩教学视频播放模块 - V1 技术方案</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h1, h2, h3 {
+            color: #007aff;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        h1 {
+            text-align: center;
+            border: none;
+            color: #1a1a1a;
+        }
+        .phase-box {
+            background-color: #e7f3ff;
+            border-left: 5px solid #007aff;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .phase-box p {
+            margin: 0;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        li::before {
+            content: '✓';
+            color: #28a745;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        code {
+            background-color: #e9ecef;
+            color: #e83e8c;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SF Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+        }
+        .tech-stack-item strong {
+            display: inline-block;
+            width: 120px;
+            font-weight: 600;
+        }
+        .section-title {
+            font-size: 1.5em;
+            margin-top: 40px;
+        }
+        .subsection-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #343a40;
+            margin-top: 25px;
+            border-bottom: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .label {
+            background-color: #007aff;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>iOS 攀岩教学视频播放模块 - V1 技术方案</h1>
+        <p style="text-align:center; color: #6c757d;">基于项目规划图、腾讯云服务及现有技术栈的设计</p>
+
+        <div class="phase-box">
+            <h3>第1阶段 (0-3个月): 基础功能夯实期</h3>
+            <p><strong>核心目标：</strong>完成首个版本核心能力，构建一套稳定、可靠、体验流畅的视频播放与基础用户系统。</p>
+        </div>
+
+        <h2 id="architecture">整体架构</h2>
+        <p>系统由四部分组成：iOS客户端、Golang后台、腾讯云对象存储(COS)和媒体处理(MPS)、腾讯云内容分发网络(CDN)。</p>
+        <ol>
+            <li><strong>上传流程：</strong>iOS客户端向Golang后台请求上传凭证，随后将视频文件直接上传至腾讯云COS。</li>
+            <li><strong>处理流程：</strong>视频上传成功后，触发腾讯云MPS的预设工作流，进行转码（HLS自适应码流）、截图等处理，并将处理结果存回COS。</li>
+            <li><strong>分发流程：</strong>Golang后台将存储在COS中的视频信息（如HLS播放地址、封面图地址）通过API提供给客户端。</li>
+            <li><strong>播放流程：</strong>iOS客户端通过腾讯云CDN加速访问视频资源，实现流畅播放。</li>
+        </ol>
+
+        <h2 id="tech-stack">核心技术栈</h2>
+        <p>严格遵循规划图中的选型，确保技术方案的现代化与高效性。</p>
+        <ul>
+            <li class="tech-stack-item"><strong>播放引擎:</strong> <code>AVFoundation + AVPlayer</code><br>苹果官方框架，对HLS自适应码流有原生支持，性能稳定，可定制性强。</li>
+            <li class="tech-stack-item"><strong>网络优化:</strong> <code>URLSession + 缓存策略(NSURLCache)</code><br>用于API数据请求和元数据（如封面图、视频信息）的缓存。对于视频内容，主要依赖HLS的特性和CDN。</li>
+            <li class="tech-stack-item"><strong>架构模式:</strong> <code>MVVM + SwiftUI + Combine</code><br>现代化的iOS开发范式，利用响应式编程简化状态管理，提高开发效率和代码可维护性。</li>
+            <li class="tech-stack-item"><strong>后端交互:</strong> <code>Swift Concurrency (async/await) + URLSession</code><br>使用苹果推荐的现代并发模型，让异步网络请求代码更简洁、易读、安全。</li>
+            <li class="tech-stack-item"><strong>数据存储:</strong> <code>SwiftData</code><br>用于本地缓存用户数据，如播放历史、收藏列表。作为CoreData的现代替代方案，与SwiftUI集成更紧密。</li>
+        </ul>
+
+        <h2 id="features">核心功能点实现方案</h2>
+        <p>将规划图中的功能点拆解为后端和客户端的具体实现任务。</p>
+        
+        <h3 class="subsection-title"><span class="label">后端</span> Golang & 腾讯云</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>功能模块</th>
+                    <th>实现方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>视频处理</strong></td>
+                    <td>
+                        1. <strong>配置MPS工作流：</strong>登录腾讯云控制台，创建媒体处理工作流，调用<code>ProcessMedia</code>接口。<br>
+                        2. <strong>转码任务：</strong>配置为“转自适应码流”，输出HLS格式，至少包含360p(标清)、720p(高清)两种规格。<br>
+                        3. <strong>截图任务：</strong>配置为生成雪碧图或指定时间点的截图，用作视频封面。
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>API服务</strong></td>
+                    <td>
+                        使用Golang + Gin/Echo框架，提供RESTful API：<br>
+                        - <code>POST /api/v1/upload/credential</code>: 获取COS上传临时凭证。<br>
+                        - <code>GET /api/v1/videos</code>: 获取视频列表，包含ID、标题、封面图(CDN地址)。<br>
+                        - <code>GET /api/v1/videos/{id}</code>: 获取单个视频详情，包含HLS播放地址(CDN地址)、描述、作者等信息。<br>
+                        - <code>POST /api/v1/user/favorites</code> & <code>GET /api/v1/user/history</code>: 用户收藏与历史记录的同步接口。
+                    </td>
+                </tr>
+                 <tr>
+                    <td><strong>用户系统</strong></td>
+                    <td>
+                        - 集成手机号/Apple ID登录验证逻辑。<br>
+                        - 设计数据库表结构，存储用户信息、视频元数据、用户收藏/历史关系。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="subsection-title"><span class="label">前端</span> iOS客户端 (SwiftUI)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>功能模块</th>
+                    <th>实现方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>视频缓冲与播放</strong></td>
+                    <td>
+                        - <strong>HLS自适应播放：</strong>直接将Golang后台返回的<code>.m3u8</code> CDN地址传入<code>AVPlayer</code>，AVFoundation会自动根据网络状况选择最佳码率。<br>
+                        - <strong>智能缓冲：</strong>在用户浏览视频列表时，可预先加载下一个可能播放视频的元数据和封面图。<br>
+                        - <strong>断点续播：</strong>监听<code>AVPlayer</code>的播放进度，定时（如每5秒）或在App进入后台时，将<code>(videoId, currentTime)</code>存入<code>SwiftData</code>。下次播放时检查并seek到记录的位置。
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>播放控制</strong></td>
+                    <td>
+                        - <strong>自定义播放器UI：</strong>在SwiftUI的<code>VideoPlayer</code>之上覆盖一层自定义的<code>ZStack</code>，包含所有控制组件。<br>
+                        - <strong>进度条拖拽：</strong>使用<code>Slider</code>，绑定到播放器的<code>currentTime</code>。在拖拽开始时暂停时间更新，拖拽结束后调用<code>player.seek(to:)</code>。<br>
+                        - <strong>倍速播放：</strong>提供一个按钮，点击后循环切换<code>player.rate = 1.0, 1.5, 2.0</code>等。<br>
+                        - <strong>清晰度切换：</strong>V1可依赖HLS自动切换。若要手动，需解析<code>player.currentItem.asset.variants</code>，提供选项给用户，并通过设置<code>preferredPeakBitRate</code>来实现。
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>用户体系与社交</strong></td>
+                    <td>
+                        - <strong>登录：</strong>集成<code>AuthenticationServices</code>实现Sign in with Apple。<br>
+                        - <strong>收藏/历史：</strong>
+                            1. 用户点击收藏，UI立即响应（乐观更新），同时将数据写入本地<code>SwiftData</code>。<br>
+                            2. 启动一个后台任务，调用后端API，将本地变更同步至云端。
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>基础UI</strong></td>
+                    <td>
+                        - <strong>仿YouTube布局：</strong>上方为视频播放区域，下方为<code>ScrollView</code>，包含视频标题、描述、相关推荐等。<br>
+                        - <strong>横竖屏切换：</strong>监听设备方向变化，通过修改View的布局约束或替换整个View来实现全屏/竖屏切换。<br>
+                        - <strong>暗黑模式：</strong>使用系统颜色(<code>Color.primary</code>, <code>Color.secondary</code>)和材质(<code>.ultraThinMaterial</code>)确保UI自动适配。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>

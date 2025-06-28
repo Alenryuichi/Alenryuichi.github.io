@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>攀岩科学 - 产品架构设计与技术架构选型</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+        }
+        
+        .section h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .tech-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .tech-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .pros, .cons {
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .pros {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        .cons {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .cost-table th,
+        .cost-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .cost-table th {
+            background: #667eea;
+            color: white;
+        }
+        
+        .cost-table tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .architecture-diagram {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .product-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .matrix-item {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .matrix-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .matrix-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .storage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .storage-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .storage-card h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .storage-details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .cost-highlight {
+            background: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin: 2px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 47px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>攀岩科学</h1>
+            <p>产品架构设计与技术架构选型方案</p>
+            <p style="font-size: 1em; margin-top: 10px;">初创团队 · 4人团队 · 性价比优先</p>
+        </div>
+
+        <div class="section">
+            <h2>📋 项目概述</h2>
+            <div class="highlight">
+                <h4>团队现状</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 15px 0;">
+                    <div>
+                        <p><strong>👑 钰哥（主责任人）</strong></p>
+                        <ul style="margin-left: 15px; font-size: 0.9em;">
+                            <li>产品运营与推广</li>
+                            <li>2B合作与商务拓展</li>
+                            <li>团队统筹管理</li>
+                            <li>高质量攀岩视频制作</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p><strong>👨‍💻 鸭哥</strong></p>
+                        <ul style="margin-left: 15px; font-size: 0.9em;">
+                            <li>AI赋能技术开发</li>
+                            <li>前后端架构设计</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p><strong>👨‍💻小海</strong></p>
+                        <ul style="margin-left: 15px; font-size: 0.9em;">
+                            <li>技术选型与架构</li>
+                            <li>产品需求</li>
+                            <li>UI设计、前后端开发</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p><strong>🎬 Fiona</strong></p>
+                        <ul style="margin-left: 15px; font-size: 0.9em;">
+                            <li>动作捕捉技术</li>
+                            <li>内容质量把控</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <p><strong>团队特点：</strong></p>
+                    <ul>
+                        <li><strong>团队规模：</strong>4人精英团队，技能互补</li>
+                        <li><strong>技术栈：</strong>全栈开发能力，AI+视频+3D技术</li>
+                        <li><strong>产品定位：</strong>攀岩垂直领域应用，技术驱动创新</li>
+                        <li><strong>核心优势：</strong>专业内容+技术创新+商业运营</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>核心功能模块</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🎥 教学视频专区</h4>
+                    <p>高质量攀岩教学视频，AI辅助翻译和动作比对</p>
+                    <div class="tag">视频处理</div>
+                    <div class="tag">AI分析</div>
+                </div>
+                <div class="tech-card">
+                    <h4>🏔️ 三维重建读线</h4>
+                    <p>基于iPhone LiDAR的岩馆3D重建和路线分析</p>
+                    <div class="tag">3D重建</div>
+                    <div class="tag">计算机视觉</div>
+                </div>
+                <div class="tech-card">
+                    <h4>💪 攀训模块</h4>
+                    <p>专业训练计划和动作库，Apple Watch集成</p>
+                    <div class="tag">健康数据</div>
+                    <div class="tag">训练记录</div>
+                </div>
+                <div class="tech-card">
+                    <h4>👨‍🏫 教练辅助</h4>
+                    <p>B端教练工具，学员管理和数据分析</p>
+                    <div class="tag">SaaS</div>
+                    <div class="tag">数据分析</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏗️ 产品功能矩阵架构</h2>
+
+            <h3>核心功能模块矩阵</h3>
+            <div class="product-matrix">
+                <div class="matrix-item">
+                    <h4>🎥 教学视频专区</h4>
+                    <p><strong>核心功能：</strong></p>
+                    <ul style="text-align: left; font-size: 0.9em;">
+                        <li>视频分级系统</li>
+                        <li>AI翻译字幕</li>
+                        <li>动作比对分析</li>
+                        <li>个性化推荐</li>
+                        <li>付费订阅内容</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-item">
+                    <h4>🏔️ 三维重建读线</h4>
+                    <p><strong>核心功能：</strong></p>
+                    <ul style="text-align: left; font-size: 0.9em;">
+                        <li>岩馆3D重建</li>
+                        <li>路线自动识别</li>
+                        <li>脑攀引导系统</li>
+                        <li>解法动画演示</li>
+                        <li>攀爬记录分享</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-item">
+                    <h4>💪 攀训模块</h4>
+                    <p><strong>核心功能：</strong></p>
+                    <ul style="text-align: left; font-size: 0.9em;">
+                        <li>训练计划制定</li>
+                        <li>3D动作库</li>
+                        <li>历史数据追踪</li>
+                        <li>Apple Watch集成</li>
+                        <li>身体评分系统</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-item">
+                    <h4>👨‍🏫 教练辅助</h4>
+                    <p><strong>核心功能：</strong></p>
+                    <ul style="text-align: left; font-size: 0.9em;">
+                        <li>学员管理系统</li>
+                        <li>训练数据分析</li>
+                        <li>进度报告生成</li>
+                        <li>计划推荐引擎</li>
+                        <li>多教练协同</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-item">
+                    <h4>👥 社交系统</h4>
+                    <p><strong>核心功能：</strong></p>
+                    <ul style="text-align: left; font-size: 0.9em;">
+                        <li>攀岩日历分享</li>
+                        <li>成就展示</li>
+                        <li>社区问答</li>
+                        <li>好友关注</li>
+                        <li>挑战赛事</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-item">
+                    <h4>💰 商业化模块</h4>
+                    <p><strong>核心功能：</strong></p>
+                    <ul style="text-align: left; font-size: 0.9em;">
+                        <li>会员订阅系统</li>
+                        <li>装备商城</li>
+                        <li>教练认证</li>
+                        <li>岩馆SaaS</li>
+                        <li>数据增值服务</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>功能优先级矩阵</h3>
+            <div class="architecture-diagram">
+                <h4>开发优先级规划</h4>
+                <table class="cost-table" style="margin: 20px auto; max-width: 800px;">
+                    <thead>
+                        <tr>
+                            <th>优先级</th>
+                            <th>功能模块</th>
+                            <th>开发周期</th>
+                            <th>用户价值</th>
+                            <th>技术难度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #d4edda;">
+                            <td><strong>P0 (必须)</strong></td>
+                            <td>用户系统 + 基础视频</td>
+                            <td>4周</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>⭐⭐</td>
+                        </tr>
+                        <tr style="background: #d4edda;">
+                            <td><strong>P0 (必须)</strong></td>
+                            <td>训练记录 + 数据展示</td>
+                            <td>3周</td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>⭐⭐</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>P1 (重要)</strong></td>
+                            <td>AI翻译 + 动作识别</td>
+                            <td>6周</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>⭐⭐⭐⭐</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>P1 (重要)</strong></td>
+                            <td>3D重建原型</td>
+                            <td>8周</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                        </tr>
+                        <tr style="background: #f8d7da;">
+                            <td><strong>P2 (可选)</strong></td>
+                            <td>社交功能</td>
+                            <td>4周</td>
+                            <td>⭐⭐⭐</td>
+                            <td>⭐⭐⭐</td>
+                        </tr>
+                        <tr style="background: #f8d7da;">
+                            <td><strong>P2 (可选)</strong></td>
+                            <td>教练端SaaS</td>
+                            <td>6周</td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>⭐⭐⭐</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>技术架构总览</h3>
+            <div class="architecture-diagram">
+                <h4>系统架构图</h4>
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; color: white; margin: 20px 0;">
+                    <div style="display: grid; grid-template-rows: auto auto auto auto; gap: 20px;">
+
+                        <!-- 前端应用层 -->
+                        <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.3);">
+                            <h4 style="text-align: center; margin-bottom: 15px; color: #fff;">🌐 前端应用层</h4>
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">📱</div>
+                                    <div><strong>iOS App</strong></div>
+                                    <div style="font-size: 0.9em;">(Swift)</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">🤖</div>
+                                    <div><strong>Android App</strong></div>
+                                    <div style="font-size: 0.9em;">(Flutter)</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">💻</div>
+                                    <div><strong>Web后台</strong></div>
+                                    <div style="font-size: 0.9em;">(React)</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">📊</div>
+                                    <div><strong>数据看板</strong></div>
+                                    <div style="font-size: 0.9em;">(Vue.js)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- API网关层 -->
+                        <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+                            <h4 style="margin-bottom: 10px; color: #fff;">🚪 API网关层 (阿里云)</h4>
+                            <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 8px; display: inline-block;">
+                                Kong + SLB + API Gateway
+                            </div>
+                        </div>
+
+                        <!-- 微服务层 -->
+                        <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.3);">
+                            <h4 style="text-align: center; margin-bottom: 15px; color: #fff;">⚙️ 微服务层</h4>
+                            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">👤</div>
+                                    <div><strong>用户服务</strong></div>
+                                    <div style="font-size: 0.9em;">(Golang)</div>
+                                    <div style="font-size: 0.8em;">认证授权</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">🎥</div>
+                                    <div><strong>视频服务</strong></div>
+                                    <div style="font-size: 0.9em;">(Golang)</div>
+                                    <div style="font-size: 0.8em;">内容管理</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">🏔️</div>
+                                    <div><strong>3D服务</strong></div>
+                                    <div style="font-size: 0.9em;">(Python)</div>
+                                    <div style="font-size: 0.8em;">重建分析</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">💪</div>
+                                    <div><strong>训练服务</strong></div>
+                                    <div style="font-size: 0.9em;">(Golang)</div>
+                                    <div style="font-size: 0.8em;">数据记录</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">🤖</div>
+                                    <div><strong>AI服务</strong></div>
+                                    <div style="font-size: 0.9em;">(Python)</div>
+                                    <div style="font-size: 0.8em;">智能分析</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 数据存储层 -->
+                        <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.3);">
+                            <h4 style="text-align: center; margin-bottom: 15px; color: #fff;">💾 数据存储层 (阿里云)</h4>
+                            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">🐘</div>
+                                    <div><strong>PostgreSQL</strong></div>
+                                    <div style="font-size: 0.8em;">主业务数据</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">⚡</div>
+                                    <div><strong>Redis</strong></div>
+                                    <div style="font-size: 0.8em;">缓存会话</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">📦</div>
+                                    <div><strong>OSS</strong></div>
+                                    <div style="font-size: 0.8em;">文件存储</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">📊</div>
+                                    <div><strong>ClickHouse</strong></div>
+                                    <div style="font-size: 0.8em;">分析数据</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 2em;">🔍</div>
+                                    <div><strong>ElasticSearch</strong></div>
+                                    <div style="font-size: 0.8em;">搜索引擎</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>架构设计原则</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🎯 设计原则</h4>
+                    <ul>
+                        <li><strong>微服务架构：</strong>便于团队分工和独立部署</li>
+                        <li><strong>云原生：</strong>基于容器化部署，支持弹性扩缩容</li>
+                        <li><strong>API优先：</strong>统一的RESTful API，便于多端接入</li>
+                        <li><strong>数据分离：</strong>业务数据、缓存、文件存储、分析数据分离</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <h4>🔧 技术选型原则</h4>
+                    <ul>
+                        <li><strong>性价比优先：</strong>开源技术 + 阿里云生态</li>
+                        <li><strong>团队匹配：</strong>基于现有技能栈选择</li>
+                        <li><strong>快速迭代：</strong>支持敏捷开发和持续部署</li>
+                        <li><strong>扩展性：</strong>支持从MVP到大规模的平滑扩展</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚙️ 技术架构选型</h2>
+
+            <h3>后端技术栈</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🔧 主要语言：Golang</h4>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <strong>✅ 优势</strong>
+                            <ul>
+                                <li>高性能，并发处理能力强</li>
+                                <li>部署简单，单二进制文件</li>
+                                <li>内存占用低，适合容器化</li>
+                                <li>团队熟悉，开发效率高</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <strong>⚠️ 考虑</strong>
+                            <ul>
+                                <li>AI/ML库生态不如Python丰富</li>
+                                <li>需要CGO调用C++库时复杂</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p><strong>应用场景：</strong>API服务、用户管理、业务逻辑</p>
+                </div>
+
+                <div class="tech-card">
+                    <h4>🐍 辅助语言：Python</h4>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <strong>✅ 优势</strong>
+                            <ul>
+                                <li>AI/ML生态丰富(OpenCV, MediaPipe)</li>
+                                <li>3D重建库支持好</li>
+                                <li>快速原型开发</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <strong>⚠️ 考虑</strong>
+                            <ul>
+                                <li>性能相对较低</li>
+                                <li>部署相对复杂</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p><strong>应用场景：</strong>AI服务、3D重建、视频处理</p>
+                </div>
+            </div>
+
+            <h3>数据库选型</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🐘 主数据库：PostgreSQL</h4>
+                    <p><strong>选择理由：</strong></p>
+                    <ul>
+                        <li>开源免费，无许可证成本</li>
+                        <li>支持JSON字段，适合灵活数据结构</li>
+                        <li>PostGIS扩展支持地理位置数据</li>
+                        <li>ACID事务保证数据一致性</li>
+                        <li>丰富的索引类型，查询性能优秀</li>
+                    </ul>
+                    <p><strong>成本：</strong>云服务约¥350-1,400/月（根据规模）</p>
+                    <p><strong>💡 免费额度：</strong>阿里云RDS有12个月免费试用（1核1G）</p>
+                </div>
+
+                <div class="tech-card">
+                    <h4>⚡ 缓存：Redis</h4>
+                    <p><strong>选择理由：</strong></p>
+                    <ul>
+                        <li>高性能内存数据库</li>
+                        <li>支持多种数据结构</li>
+                        <li>会话存储、API限流</li>
+                        <li>发布订阅功能</li>
+                    </ul>
+                    <p><strong>成本：</strong>云服务约¥140-700/月</p>
+                    <p><strong>💡 免费额度：</strong>阿里云Redis有3个月免费试用（256MB）</p>
+                </div>
+
+                <div class="tech-card">
+                    <h4>📊 分析数据库：ClickHouse</h4>
+                    <p><strong>选择理由：</strong></p>
+                    <ul>
+                        <li>列式存储，分析查询性能极佳</li>
+                        <li>压缩率高，存储成本低</li>
+                        <li>适合用户行为分析</li>
+                        <li>开源，可自建降低成本</li>
+                    </ul>
+                    <p><strong>成本：</strong>自建约¥210-560/月</p>
+                    <p><strong>💡 免费方案：</strong>可使用开源版本自建，或PostgreSQL替代</p>
+                </div>
+            </div>
+
+            <h3>🗄️ 分类存储架构设计</h3>
+
+            <div class="storage-grid">
+                <div class="storage-card">
+                    <h4>🎥 视频存储方案</h4>
+                    <div class="storage-details">
+                        <p><strong>存储架构：</strong>阿里云OSS + CDN + 视频点播</p>
+                        <ul>
+                            <li><strong>原始视频：</strong>OSS标准存储（高频访问）</li>
+                            <li><strong>转码视频：</strong>OSS低频存储（多分辨率）</li>
+                            <li><strong>缩略图：</strong>OSS标准存储 + CDN缓存</li>
+                            <li><strong>直播录制：</strong>视频直播服务 + 自动存档</li>
+                        </ul>
+                        <p><strong>技术特性：</strong></p>
+                        <ul>
+                            <li>自动转码（H.264/H.265）</li>
+                            <li>多分辨率适配（480p/720p/1080p）</li>
+                            <li>智能封面提取</li>
+                            <li>防盗链保护</li>
+                        </ul>
+                    </div>
+                    <div class="cost-highlight">月成本：¥800-2000（含CDN流量）</div>
+                </div>
+
+                <div class="storage-card">
+                    <h4>👤 用户数据存储</h4>
+                    <div class="storage-details">
+                        <p><strong>存储架构：</strong>RDS PostgreSQL + Redis</p>
+                        <ul>
+                            <li><strong>用户基础信息：</strong>PostgreSQL主库</li>
+                            <li><strong>会话数据：</strong>Redis集群</li>
+                            <li><strong>用户偏好：</strong>PostgreSQL JSON字段</li>
+                            <li><strong>社交关系：</strong>PostgreSQL + 图数据库</li>
+                        </ul>
+                        <p><strong>数据分层：</strong></p>
+                        <ul>
+                            <li>热数据：Redis（1天内活跃）</li>
+                            <li>温数据：PostgreSQL（常用查询）</li>
+                            <li>冷数据：OSS归档（历史备份）</li>
+                        </ul>
+                    </div>
+                    <div class="cost-highlight">月成本：¥600-1200</div>
+                </div>
+
+                <div class="storage-card">
+                    <h4>🏔️ 3D模型存储</h4>
+                    <div class="storage-details">
+                        <p><strong>存储架构：</strong>OSS + 专用CDN</p>
+                        <ul>
+                            <li><strong>原始点云：</strong>OSS冷存储（压缩存储）</li>
+                            <li><strong>网格模型：</strong>OSS标准存储（.obj/.ply格式）</li>
+                            <li><strong>纹理贴图：</strong>OSS + CDN（快速加载）</li>
+                            <li><strong>路线数据：</strong>PostgreSQL（结构化存储）</li>
+                        </ul>
+                        <p><strong>优化策略：</strong></p>
+                        <ul>
+                            <li>模型压缩（Draco编码）</li>
+                            <li>LOD多级细节</li>
+                            <li>渐进式加载</li>
+                            <li>边缘缓存</li>
+                        </ul>
+                    </div>
+                    <div class="cost-highlight">月成本：¥400-800</div>
+                </div>
+
+                <div class="storage-card">
+                    <h4>💪 训练数据存储</h4>
+                    <div class="storage-details">
+                        <p><strong>存储架构：</strong>时序数据库 + 分析引擎</p>
+                        <ul>
+                            <li><strong>训练记录：</strong>ClickHouse（时序数据）</li>
+                            <li><strong>健康数据：</strong>InfluxDB（Apple Watch数据）</li>
+                            <li><strong>动作视频：</strong>OSS + 智能标注</li>
+                            <li><strong>分析报告：</strong>PostgreSQL + 缓存</li>
+                        </ul>
+                        <p><strong>数据处理：</strong></p>
+                        <ul>
+                            <li>实时数据流（Kafka）</li>
+                            <li>批量分析（Spark）</li>
+                            <li>机器学习（PAI平台）</li>
+                            <li>可视化展示（DataV）</li>
+                        </ul>
+                    </div>
+                    <div class="cost-highlight">月成本：¥300-600</div>
+                </div>
+
+                <div class="storage-card">
+                    <h4>📊 分析数据存储</h4>
+                    <div class="storage-details">
+                        <p><strong>存储架构：</strong>数据湖 + 实时计算</p>
+                        <ul>
+                            <li><strong>用户行为：</strong>ClickHouse（实时分析）</li>
+                            <li><strong>业务指标：</strong>MaxCompute（离线计算）</li>
+                            <li><strong>日志数据：</strong>SLS日志服务</li>
+                            <li><strong>搜索数据：</strong>ElasticSearch</li>
+                        </ul>
+                        <p><strong>数据流转：</strong></p>
+                        <ul>
+                            <li>实时采集：DataHub</li>
+                            <li>ETL处理：DataWorks</li>
+                            <li>数据质量：DQC监控</li>
+                            <li>数据服务：API网关</li>
+                        </ul>
+                    </div>
+                    <div class="cost-highlight">月成本：¥500-1000</div>
+                </div>
+
+                <div class="storage-card">
+                    <h4>🔒 备份与安全</h4>
+                    <div class="storage-details">
+                        <p><strong>备份策略：</strong>多层级备份保护</p>
+                        <ul>
+                            <li><strong>数据库备份：</strong>RDS自动备份 + 跨区域</li>
+                            <li><strong>文件备份：</strong>OSS跨区域复制</li>
+                            <li><strong>增量备份：</strong>DBS数据库备份</li>
+                            <li><strong>灾难恢复：</strong>异地多活架构</li>
+                        </ul>
+                        <p><strong>安全措施：</strong></p>
+                        <ul>
+                            <li>数据加密（AES-256）</li>
+                            <li>访问控制（RAM权限）</li>
+                            <li>审计日志（ActionTrail）</li>
+                            <li>合规认证（等保三级）</li>
+                        </ul>
+                    </div>
+                    <div class="cost-highlight">月成本：¥200-400</div>
+                </div>
+            </div>
+
+            <h3>存储成本优化策略</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>💡 智能分层存储</h4>
+                    <ul>
+                        <li><strong>热数据：</strong>标准存储（7天内访问）</li>
+                        <li><strong>温数据：</strong>低频存储（30天内访问）</li>
+                        <li><strong>冷数据：</strong>归档存储（长期保存）</li>
+                        <li><strong>自动转换：</strong>生命周期管理规则</li>
+                    </ul>
+                    <p><strong>预期节省：</strong>存储成本降低40-60%</p>
+                </div>
+
+                <div class="tech-card">
+                    <h4>🚀 CDN优化</h4>
+                    <ul>
+                        <li><strong>智能压缩：</strong>Gzip/Brotli压缩</li>
+                        <li><strong>图片优化：</strong>WebP格式转换</li>
+                        <li><strong>缓存策略：</strong>分层缓存机制</li>
+                        <li><strong>边缘计算：</strong>就近处理请求</li>
+                    </ul>
+                    <p><strong>预期节省：</strong>流量成本降低30-50%</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>☁️ 云服务选型</h2>
+
+            <h3>云平台对比</h3>
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>云平台</th>
+                        <th>优势</th>
+                        <th>劣势</th>
+                        <th>月成本估算</th>
+                        <th>推荐度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>阿里云</strong></td>
+                        <td>国内速度快、生态完整、中文支持</td>
+                        <td>国际化支持一般</td>
+                        <td>¥1,400-3,500</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>腾讯云</strong></td>
+                        <td>游戏/社交生态、AI能力强</td>
+                        <td>企业服务相对较弱</td>
+                        <td>¥1,300-3,200</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AWS</strong></td>
+                        <td>全球化、服务最全面</td>
+                        <td>成本高、国内速度慢</td>
+                        <td>¥2,100-5,600</td>
+                        <td>⭐⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight">
+                <h4>💡 推荐方案：阿里云为主</h4>
+                <ul>
+                    <li><strong>计算：</strong>ECS + 容器服务ACK</li>
+                    <li><strong>存储：</strong>RDS PostgreSQL + Redis + OSS</li>
+                    <li><strong>网络：</strong>SLB + CDN</li>
+                    <li><strong>监控：</strong>云监控 + 日志服务SLS</li>
+                </ul>
+            </div>
+
+            <h3>容器化部署</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🐳 Docker + Kubernetes</h4>
+                    <p><strong>优势：</strong></p>
+                    <ul>
+                        <li>环境一致性，开发生产环境统一</li>
+                        <li>弹性扩缩容，应对流量波动</li>
+                        <li>服务发现和负载均衡</li>
+                        <li>滚动更新，零停机部署</li>
+                    </ul>
+                    <p><strong>初期方案：</strong>阿里云ACK托管版，降低运维复杂度</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🤖 AI服务架构</h2>
+
+            <h3>AI能力规划</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🎥 视频处理AI</h4>
+                    <p><strong>技术栈：</strong></p>
+                    <ul>
+                        <li><strong>动作识别：</strong>MediaPipe + OpenPose</li>
+                        <li><strong>视频翻译：</strong>阿里云机器翻译API</li>
+                        <li><strong>语音识别：</strong>阿里云语音服务</li>
+                    </ul>
+                    <p><strong>部署方案：</strong>Python微服务 + GPU实例</p>
+                    <p><strong>成本：</strong>GPU实例¥700-2,100/月 + API调用费</p>
+                </div>
+
+                <div class="tech-card">
+                    <h4>🏔️ 3D重建AI</h4>
+                    <p><strong>技术栈：</strong></p>
+                    <ul>
+                        <li><strong>3D重建：</strong>COLMAP + NeRF</li>
+                        <li><strong>岩点识别：</strong>YOLO + 自训练模型</li>
+                        <li><strong>路线分析：</strong>图算法 + 启发式搜索</li>
+                    </ul>
+                    <p><strong>部署方案：</strong>高性能GPU集群</p>
+                    <p><strong>成本：</strong>按需GPU实例¥350-1,400/月</p>
+                </div>
+            </div>
+
+            <h3>AI服务部署策略</h3>
+            <div class="highlight">
+                <h4>🎯 分阶段部署</h4>
+                <ul>
+                    <li><strong>MVP阶段：</strong>使用云API服务，快速验证功能</li>
+                    <li><strong>成长阶段：</strong>自建核心AI服务，降低成本</li>
+                    <li><strong>成熟阶段：</strong>边缘计算，提升响应速度</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📱 移动端架构</h2>
+
+            <h3>跨平台策略</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🍎 iOS (当前)</h4>
+                    <p><strong>技术栈：</strong>Swift + SwiftUI</p>
+                    <ul>
+                        <li>原生性能，用户体验最佳</li>
+                        <li>ARKit支持3D重建功能</li>
+                        <li>HealthKit集成Apple Watch</li>
+                        <li>Core ML支持本地AI推理</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <h4>🤖 Android (规划)</h4>
+                    <p><strong>推荐方案：Flutter</strong></p>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <strong>✅ 优势</strong>
+                            <ul>
+                                <li>一套代码，双端运行</li>
+                                <li>性能接近原生</li>
+                                <li>Google维护，生态成熟</li>
+                                <li>开发效率高</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <strong>⚠️ 考虑</strong>
+                            <ul>
+                                <li>需要学习Dart语言</li>
+                                <li>部分原生功能需要插件</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>移动端技术选型对比</h3>
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>方案</th>
+                        <th>开发成本</th>
+                        <th>维护成本</th>
+                        <th>性能</th>
+                        <th>推荐度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Flutter</strong></td>
+                        <td>中等</td>
+                        <td>低</td>
+                        <td>高</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>React Native</strong></td>
+                        <td>低</td>
+                        <td>中等</td>
+                        <td>中等</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>原生开发</strong></td>
+                        <td>高</td>
+                        <td>高</td>
+                        <td>最高</td>
+                        <td>⭐⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>💰 成本分析</h2>
+
+            <h3>初期成本预算（月）</h3>
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>服务类别</th>
+                        <th>具体服务</th>
+                        <th>配置</th>
+                        <th>月成本(¥)</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3"><strong>计算资源</strong></td>
+                        <td>ECS实例</td>
+                        <td>2核4G × 3台</td>
+                        <td>¥840</td>
+                        <td>API服务集群</td>
+                    </tr>
+                    <tr>
+                        <td>GPU实例</td>
+                        <td>按需使用</td>
+                        <td>¥700</td>
+                        <td>AI计算</td>
+                    </tr>
+                    <tr>
+                        <td>ACK托管</td>
+                        <td>标准版</td>
+                        <td>¥350</td>
+                        <td>容器编排</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"><strong>数据库</strong></td>
+                        <td>RDS PostgreSQL</td>
+                        <td>2核4G高可用</td>
+                        <td>¥560</td>
+                        <td>主数据库</td>
+                    </tr>
+                    <tr>
+                        <td>Redis集群</td>
+                        <td>2G内存</td>
+                        <td>¥210</td>
+                        <td>缓存</td>
+                    </tr>
+                    <tr>
+                        <td>ClickHouse</td>
+                        <td>4核8G</td>
+                        <td>¥280</td>
+                        <td>分析数据库</td>
+                    </tr>
+                    <tr>
+                        <td>ElasticSearch</td>
+                        <td>2核4G</td>
+                        <td>¥320</td>
+                        <td>搜索引擎</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3"><strong>存储服务</strong></td>
+                        <td>OSS对象存储</td>
+                        <td>500GB + 流量</td>
+                        <td>¥350</td>
+                        <td>文件存储</td>
+                    </tr>
+                    <tr>
+                        <td>CDN加速</td>
+                        <td>国内节点</td>
+                        <td>¥420</td>
+                        <td>内容分发</td>
+                    </tr>
+                    <tr>
+                        <td>视频点播</td>
+                        <td>转码+存储</td>
+                        <td>¥600</td>
+                        <td>视频服务</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3"><strong>AI服务</strong></td>
+                        <td>机器翻译</td>
+                        <td>10万字符/月</td>
+                        <td>¥140</td>
+                        <td>视频翻译</td>
+                    </tr>
+                    <tr>
+                        <td>语音识别</td>
+                        <td>100小时/月</td>
+                        <td>¥105</td>
+                        <td>语音处理</td>
+                    </tr>
+                    <tr>
+                        <td>图像识别</td>
+                        <td>10万次调用</td>
+                        <td>¥200</td>
+                        <td>动作识别</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3"><strong>运维监控</strong></td>
+                        <td>云监控</td>
+                        <td>基础版</td>
+                        <td>¥80</td>
+                        <td>系统监控</td>
+                    </tr>
+                    <tr>
+                        <td>日志服务</td>
+                        <td>10GB/天</td>
+                        <td>¥120</td>
+                        <td>日志分析</td>
+                    </tr>
+                    <tr>
+                        <td>安全防护</td>
+                        <td>基础版</td>
+                        <td>¥150</td>
+                        <td>安全防护</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>应用分发</strong></td>
+                        <td>Apple Developer</td>
+                        <td>年费(¥688/12)</td>
+                        <td>¥57</td>
+                        <td>iOS应用分发</td>
+                    </tr>
+                    <tr>
+                        <td>Google Play</td>
+                        <td>一次性分摊</td>
+                        <td>¥15</td>
+                        <td>Android应用分发</td>
+                    </tr>
+                    <tr style="background: #e8f5e8; font-weight: bold;">
+                        <td colspan="3"><strong>总计</strong></td>
+                        <td><strong>¥5,497</strong></td>
+                        <td>初期月成本</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>成本优化策略</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>💡 短期优化</h4>
+                    <ul>
+                        <li>使用预付费实例，节省20-30%</li>
+                        <li>开发环境使用低配置实例</li>
+                        <li>AI服务按需启动，避免空闲成本</li>
+                        <li>CDN使用智能压缩，减少流量费用</li>
+                    </ul>
+                    <p><strong>预期节省：</strong>¥700-1,050/月</p>
+                </div>
+
+                <div class="tech-card">
+                    <h4>🚀 长期优化</h4>
+                    <ul>
+                        <li>自建核心AI服务，降低API调用费</li>
+                        <li>使用Spot实例处理批量任务</li>
+                        <li>数据分层存储，冷数据归档</li>
+                        <li>边缘计算，减少中心化处理</li>
+                    </ul>
+                    <p><strong>预期节省：</strong>¥1,400-2,100/月</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗓️ 开发路线图</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Phase 1: MVP开发 (3个月)</h4>
+                    <p><strong>目标：</strong>验证核心功能，获取种子用户</p>
+                    <ul>
+                        <li>✅ 基础架构搭建（Golang API + PostgreSQL）</li>
+                        <li>✅ iOS App基础功能</li>
+                        <li>🔄 教学视频模块（基础播放 + 分类）</li>
+                        <li>🔄 用户系统（注册登录 + 个人中心）</li>
+                        <li>📋 简单的训练记录功能</li>
+                    </ul>
+                    <p><strong>技术重点：</strong>稳定的基础架构，快速迭代能力</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Phase 2: AI功能集成 (2个月)</h4>
+                    <p><strong>目标：</strong>差异化功能，提升用户粘性</p>
+                    <ul>
+                        <li>📋 视频AI翻译和字幕生成</li>
+                        <li>📋 基础动作识别（MediaPipe）</li>
+                        <li>📋 3D重建原型（iPhone LiDAR）</li>
+                        <li>📋 训练数据分析和可视化</li>
+                    </ul>
+                    <p><strong>技术重点：</strong>AI服务架构，Python微服务集成</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Phase 3: 跨平台扩展 (3个月)</h4>
+                    <p><strong>目标：</strong>扩大用户基数，Android用户覆盖</p>
+                    <ul>
+                        <li>📋 Flutter Android App开发</li>
+                        <li>📋 Web管理后台（教练端）</li>
+                        <li>📋 社交功能（分享、评论、关注）</li>
+                        <li>📋 付费订阅系统</li>
+                    </ul>
+                    <p><strong>技术重点：</strong>跨平台一致性，支付系统集成</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Phase 4: 商业化优化 (持续)</h4>
+                    <p><strong>目标：</strong>商业变现，规模化运营</p>
+                    <ul>
+                        <li>📋 高级AI功能（精准动作分析）</li>
+                        <li>📋 B端SaaS平台（岩馆管理）</li>
+                        <li>📋 数据分析和推荐系统</li>
+                        <li>📋 国际化支持</li>
+                    </ul>
+                    <p><strong>技术重点：</strong>性能优化，大数据处理，国际化部署</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ 风险评估与应对</h2>
+
+            <h3>技术风险</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🔴 高风险</h4>
+                    <ul>
+                        <li><strong>3D重建精度：</strong>iPhone LiDAR限制</li>
+                        <li><strong>AI模型训练：</strong>缺乏标注数据</li>
+                        <li><strong>视频版权：</strong>内容侵权风险</li>
+                    </ul>
+                    <p><strong>应对策略：</strong></p>
+                    <ul>
+                        <li>降级方案：2D图像识别替代3D</li>
+                        <li>数据合作：与岩馆、教练合作获取数据</li>
+                        <li>原创内容：签约教练制作原创视频</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <h4>🟡 中风险</h4>
+                    <ul>
+                        <li><strong>性能瓶颈：</strong>AI计算资源消耗大</li>
+                        <li><strong>跨平台兼容：</strong>Flutter生态限制</li>
+                        <li><strong>数据安全：</strong>用户隐私保护</li>
+                    </ul>
+                    <p><strong>应对策略：</strong></p>
+                    <ul>
+                        <li>弹性扩容：云原生架构支持</li>
+                        <li>原生插件：关键功能原生实现</li>
+                        <li>合规设计：GDPR、个保法合规</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>商业风险</h3>
+            <div class="highlight">
+                <h4>🎯 关键成功因素</h4>
+                <ul>
+                    <li><strong>用户获取：</strong>攀岩社区推广，KOL合作</li>
+                    <li><strong>内容质量：</strong>专业教练内容，AI辅助提升</li>
+                    <li><strong>技术壁垒：</strong>3D重建 + AI分析的组合优势</li>
+                    <li><strong>商业模式：</strong>C端订阅 + B端SaaS双轮驱动</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 总结与建议</h2>
+
+            <h3>架构优势</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>💪 技术优势</h4>
+                    <ul>
+                        <li>云原生架构，弹性扩展</li>
+                        <li>微服务设计，独立部署</li>
+                        <li>AI能力集成，差异化竞争</li>
+                        <li>跨平台策略，快速覆盖</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <h4>💰 成本优势</h4>
+                    <ul>
+                        <li>开源技术栈，无许可费用</li>
+                        <li>阿里云生态，性价比高</li>
+                        <li>按需扩容，避免资源浪费</li>
+                        <li>分阶段投入，风险可控</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>实施建议</h3>
+            <div class="highlight">
+                <h4>🚀 近期行动计划</h4>
+                <ol>
+                    <li><strong>立即开始：</strong>搭建基础架构，部署MVP版本</li>
+                    <li><strong>2周内：</strong>完成阿里云环境配置，CI/CD流水线</li>
+                    <li><strong>1个月内：</strong>iOS App基础功能开发完成</li>
+                    <li><strong>3个月内：</strong>AI功能原型验证，用户反馈收集</li>
+                </ol>
+            </div>
+
+            <div class="highlight">
+                <h4>💡 关键决策点</h4>
+                <ul>
+                    <li><strong>技术选型：</strong>Golang + Python混合架构，发挥各自优势</li>
+                    <li><strong>云服务：</strong>阿里云为主，兼顾成本和性能</li>
+                    <li><strong>AI策略：</strong>云API起步，自建服务跟进</li>
+                    <li><strong>移动端：</strong>iOS原生 + Flutter跨平台</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                <h3 style="color: #667eea;">🎯 预期成果</h3>
+                <p style="font-size: 1.1em; margin: 10px 0;">
+                    通过本架构设计，预计可在<strong>3个月内</strong>完成MVP到商业化的完整产品，
+                    <br>初期月运营成本控制在<strong>¥3,500-5,500</strong>，优化后可降至<strong>¥2,500-3,500</strong>，
+                    <br>具备支撑<strong>10万+用户</strong>的技术能力，单用户月成本约<strong>¥0.025-0.035</strong>。
+                </p>
+            </div>
+        </div>
+</body>
+</html>
