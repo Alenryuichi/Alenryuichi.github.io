@@ -16,12 +16,4 @@ layout: page
 - [攀岩教学视频能力演进路线图](/boulder/html/攀岩教学视频能力演进路线图.html)
 - [视频下载上传方案](/boulder/html/视频下载上传方案.html)
 
-## 互动内容
-- [攀岩动作演示](/boulder/climbing_demo.html)
-- [装备选择指南](/boulder/equipment_guide.html)
-
-## 工具
-- [攀岩难度计算器](/boulder/grade_calculator.html)
-- [训练计划生成器](/boulder/training_planner.html)
-
 [返回Boulder专区主页](/boulder/)
