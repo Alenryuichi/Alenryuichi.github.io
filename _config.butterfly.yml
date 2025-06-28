@@ -7,6 +7,7 @@ menu:
   Archives: /archives/ || fas fa-archive
   Tags: /tags/ || fas fa-tags
   Categories: /categories/ || fas fa-folder-open
+  Boulder: /boulder/ || fas fa-mountain
   List||fas fa-heartbeat||hide:
     Music: /music/ || fas fa-music
     Gallery: /Gallery/ || fas fa-images

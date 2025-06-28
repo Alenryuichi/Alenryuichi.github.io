@@ -1,0 +1,235 @@
+#article-container.boulder-container
+  .boulder-header
+    .boulder-title
+      h1 🧗‍♂️ Boulder专区
+      p.boulder-subtitle 攀岩爱好者的聚集地
+  
+  .boulder-nav
+    ul.boulder-menu
+      li: a(href="#basics") 基础知识
+      li: a(href="#grades") 等级系统
+      li: a(href="#techniques") 技巧分享
+      li: a(href="#equipment") 装备推荐
+      li: a(href="#safety") 安全注意
+      li: a(href="#locations") 场地推荐
+      li: a(href="#training") 训练计划
+      li: a(href="#nutrition") 营养恢复
+      li: a(href="#community") 社区交流
+  
+  .boulder-content
+    != page.content
+  
+  .boulder-gallery
+    h3 📸 攀岩瞬间
+    .gallery-grid
+      .gallery-item
+        img(src="/covers/(1).jpg" alt="攀岩照片1")
+        .overlay
+          p 经典线路挑战
+      .gallery-item
+        img(src="/covers/(2).jpg" alt="攀岩照片2")
+        .overlay
+          p 团队协作训练
+      .gallery-item
+        img(src="/covers/(3).jpg" alt="攀岩照片3")
+        .overlay
+          p 户外攀岩体验
+      .gallery-item
+        img(src="/covers/(4).jpg" alt="攀岩照片4")
+        .overlay
+          p 技巧动作展示
+  
+  .boulder-stats
+    .stats-grid
+      .stat-item
+        .stat-number 50+
+        .stat-label 攀岩线路
+      .stat-item
+        .stat-number 100+
+        .stat-label 社区成员
+      .stat-item
+        .stat-number 20+
+        .stat-label 训练技巧
+      .stat-item
+        .stat-number 365
+        .stat-label 天持续更新
+
+  style.
+    .boulder-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .boulder-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 40px 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 15px;
+      color: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .boulder-title h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .boulder-subtitle {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+    
+    .boulder-nav {
+      margin-bottom: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .boulder-menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .boulder-menu li {
+      margin: 0;
+    }
+    
+    .boulder-menu a {
+      display: block;
+      padding: 15px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+    
+    .boulder-menu a:hover {
+      background: #f8f9fa;
+      border-bottom-color: #667eea;
+      color: #667eea;
+    }
+    
+    .boulder-content {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+    
+    .boulder-content h2 {
+      color: #667eea;
+      border-left: 4px solid #667eea;
+      padding-left: 15px;
+      margin-top: 40px;
+    }
+    
+    .boulder-content h3 {
+      color: #764ba2;
+      margin-top: 30px;
+    }
+    
+    .boulder-gallery {
+      margin-bottom: 40px;
+    }
+    
+    .boulder-gallery h3 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: white;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .overlay {
+      transform: translateY(0);
+    }
+    
+    .boulder-stats {
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      border-radius: 15px;
+      padding: 40px;
+      color: white;
+      margin-bottom: 40px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 3em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+    
+    @media (max-width: 768px) {
+      .boulder-menu {
+        flex-direction: column;
+      }
+      
+      .boulder-content {
+        padding: 20px;
+      }
+      
+      .boulder-title h1 {
+        font-size: 2em;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
