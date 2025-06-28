@@ -90,11 +90,11 @@ generate_site() {
     print_message $YELLOW "🔨 生成静态文件..."
     
     # 清理旧文件
-    hexo clean
+    npx hexo clean
     check_command "清理旧文件"
-    
+
     # 生成新文件
-    hexo generate
+    npx hexo generate
     check_command "生成静态文件"
     
     print_message $GREEN "✅ 静态文件生成完成"
@@ -107,7 +107,7 @@ local_preview() {
     print_message $BLUE "Boulder专区: http://localhost:4000/boulder/"
     print_message $YELLOW "按 Ctrl+C 停止服务器"
     
-    hexo server
+    npx hexo server
 }
 
 # 函数：提交更改
@@ -177,7 +177,7 @@ full_deploy() {
         
         # 5. 部署到GitHub Pages
         print_message $YELLOW "📦 部署到GitHub Pages..."
-        hexo deploy
+        npx hexo deploy
         check_command "部署到GitHub Pages"
         
         print_message $GREEN "🎉 完整部署流程完成!"
@@ -193,7 +193,7 @@ clean_cache() {
     print_message $YELLOW "🧹 清理缓存..."
     
     # 清理Hexo缓存
-    hexo clean
+    npx hexo clean
     check_command "清理Hexo缓存"
     
     # 清理npm缓存
@@ -237,10 +237,10 @@ init_check() {
         exit 1
     fi
     
-    # 检查是否安装了hexo
-    if ! command -v hexo &> /dev/null; then
-        print_message $RED "❌ 未找到hexo命令，请先安装hexo-cli"
-        print_message $BLUE "安装命令: npm install -g hexo-cli"
+    # 检查是否可以运行hexo
+    if ! npx hexo version &> /dev/null; then
+        print_message $RED "❌ 无法运行hexo命令，请检查依赖安装"
+        print_message $BLUE "尝试运行: rm -rf node_modules && npm install --force"
         exit 1
     fi
     

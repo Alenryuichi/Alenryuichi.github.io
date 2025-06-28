@@ -58,13 +58,13 @@ read deploy_confirm
 
 if [[ $deploy_confirm =~ ^[Yy]$ ]]; then
     echo -e "${YELLOW}🔨 生成静态文件...${NC}"
-    hexo clean && hexo generate
-    
+    npx hexo clean && npx hexo generate
+
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✅ 生成成功${NC}"
-        
+
         echo -e "${YELLOW}📦 部署到GitHub Pages...${NC}"
-        hexo deploy
+        npx hexo deploy
         
         if [ $? -eq 0 ]; then
             echo -e "${GREEN}🎉 部署完成!${NC}"
