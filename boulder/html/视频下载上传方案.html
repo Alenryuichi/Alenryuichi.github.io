@@ -1,0 +1,876 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>for the future | for the future</title><meta name="keywords" content="chatgpt, tencent, huawei"><meta name="author" content="kylin"><meta name="copyright" content="kylin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="iOS与腾讯云媒体服务端到端技术方案              * {             margin: 0;             padding: 0;             box-sizing: border-box;         }                  body {             font-family: -appl">
+<meta property="og:type" content="website">
+<meta property="og:title" content="for the future">
+<meta property="og:url" content="http://alenryuichi.github.io/boulder/html/%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E4%B8%8A%E4%BC%A0%E6%96%B9%E6%A1%88.html">
+<meta property="og:site_name" content="for the future">
+<meta property="og:description" content="iOS与腾讯云媒体服务端到端技术方案              * {             margin: 0;             padding: 0;             box-sizing: border-box;         }                  body {             font-family: -appl">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://alenryuichi.github.io/covers/(3).jpg">
+<meta property="article:published_time" content="2025-06-28T09:01:12.273Z">
+<meta property="article:modified_time" content="2025-06-28T09:01:12.273Z">
+<meta property="article:author" content="kylin">
+<meta property="article:tag" content="chatgpt, tencent, huawei">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://alenryuichi.github.io/covers/(3).jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://alenryuichi.github.io/boulder/html/%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E4%B8%8A%E4%BC%A0%E6%96%B9%E6%A1%88"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="YNQaYD78sp9o-wJuFJHxNPE1P3G7W6KCsfc6acLAyO0"/><meta name="baidu-site-verification" content="code-rzg1wYpAX2"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: kylin","link":"链接: ","source":"来源: for the future","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'for the future',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2025-06-28 17:01:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/boulder/"><i class="fa-fw fas fa-mountain"></i><span> Boulder</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/sitemap.xml"><i class="fa-fw fa-solid fa-sitemap"></i><span> Sitemap</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background: linear-gradient(20deg, #dce6e5, #bdd5d7, #6797a5, #fdf1d9)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">for the future</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/boulder/"><i class="fa-fw fas fa-mountain"></i><span> Boulder</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/sitemap.xml"><i class="fa-fw fa-solid fa-sitemap"></i><span> Sitemap</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">for the future</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS与腾讯云媒体服务端到端技术方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #667eea;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section h3 {
+            color: #555;
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+        
+        .section h4 {
+            color: #666;
+            font-size: 1.2rem;
+            margin: 20px 0 10px 0;
+        }
+        
+        .flow-diagram {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: #667eea;
+            margin: 20px 0;
+            border: 2px dashed #667eea;
+            font-size: 1.1rem;
+        }
+        
+        .flow-step {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .flow-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .flow-step h5 {
+            color: #667eea;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .component-item {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0fe 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e1e8ed;
+        }
+        
+        .component-item h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .tech-column {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0fe 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e1e8ed;
+        }
+        
+        .tech-column h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+        
+        .api-endpoint {
+            background: #1a1a1a;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .api-endpoint .method {
+            color: #a6e22e;
+            font-weight: bold;
+        }
+        
+        .api-endpoint .url {
+            color: #66d9ef;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
+            border: 1px solid #4caf50;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box h4 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #fef7ed 100%);
+            border: 1px solid #ff9800;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .warning-box h4 {
+            color: #f57c00;
+            margin-bottom: 15px;
+        }
+        
+        .architecture-diagram {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .layer {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0fe 100%);
+            border: 1px solid #667eea;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .arrow {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .tech-stack {
+                grid-template-columns: 1fr;
+            }
+            
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>iOS与腾讯云媒体服务端到端技术方案</h1>
+            <p>完整的视频上传、处理、分发、播放解决方案</p>
+        </div>
+        
+        <div class="content">
+            <!-- 整体架构概览 -->
+            <div class="section">
+                <h2>🏗️ 整体架构概览</h2>
+                
+                <div class="architecture-diagram">
+                    <div class="layer">iOS 客户端 (Swift)</div>
+                    <div class="arrow">⬇️</div>
+                    <div class="layer">业务后端服务 (Golang)</div>
+                    <div class="arrow">⬇️</div>
+                    <div class="layer">腾讯云服务层 (COS + MPS + CDN)</div>
+                    <div class="arrow">⬇️</div>
+                    <div class="layer">内容分发网络 (CDN)</div>
+                    <div class="arrow">⬇️</div>
+                    <div class="layer">最终用户播放</div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>核心设计理念</h4>
+                    <ul>
+                        <li><strong>安全优先</strong>：所有云服务调用都通过后端代理，客户端不直接持有云服务密钥</li>
+                        <li><strong>异步处理</strong>：视频上传后立即返回，转码处理异步进行</li>
+                        <li><strong>状态驱动</strong>：基于视频处理状态来控制用户界面和功能可用性</li>
+                        <li><strong>智能缓存</strong>：多层缓存策略优化用户体验</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 上传流程 -->
+            <div class="section">
+                <h2>📤 视频上传流程</h2>
+                
+                <div class="flow-step" data-step="1">
+                    <h5>iOS端发起上传请求</h5>
+                    <ul>
+                        <li>用户选择视频文件（相册或拍摄）</li>
+                        <li>客户端对视频进行基础校验（格式、大小、时长）</li>
+                        <li>生成视频唯一标识和元数据</li>
+                        <li>向业务后端请求上传凭证</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-step" data-step="2">
+                    <h5>后端生成上传凭证</h5>
+                    <ul>
+                        <li>验证用户权限和配额</li>
+                        <li>调用腾讯云COS API生成预签名URL</li>
+                        <li>设置上传策略（文件大小限制、格式限制等）</li>
+                        <li>返回临时上传凭证和上传URL</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-step" data-step="3">
+                    <h5>iOS端直接上传到COS</h5>
+                    <ul>
+                        <li>使用预签名URL直接上传到腾讯云COS</li>
+                        <li>支持断点续传和分片上传</li>
+                        <li>实时显示上传进度</li>
+                        <li>上传完成后通知业务后端</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-step" data-step="4">
+                    <h5>触发媒体处理工作流</h5>
+                    <ul>
+                        <li>COS上传完成自动触发MPS工作流</li>
+                        <li>或业务后端主动调用MPS API</li>
+                        <li>启动自适应码流转码任务</li>
+                        <li>更新视频状态为"处理中"</li>
+                    </ul>
+                </div>
+
+                <div class="tech-stack">
+                    <div class="tech-column">
+                        <h4>🍎 iOS端技术要点</h4>
+                        <ul>
+                            <li><strong>文件选择</strong>：PHPickerViewController / UIImagePickerController</li>
+                            <li><strong>上传组件</strong>：URLSession + 自定义上传任务</li>
+                            <li><strong>进度监控</strong>：URLSessionTaskDelegate</li>
+                            <li><strong>断点续传</strong>：Range请求头支持</li>
+                            <li><strong>后台上传</strong>：Background URLSession</li>
+                            <li><strong>错误处理</strong>：网络异常重试机制</li>
+                        </ul>
+                    </div>
+                    <div class="tech-column">
+                        <h4>🔧 后端技术要点</h4>
+                        <ul>
+                            <li><strong>预签名URL</strong>：腾讯云COS SDK生成</li>
+                            <li><strong>上传策略</strong>：文件大小、格式、权限控制</li>
+                            <li><strong>工作流触发</strong>：MPS API调用</li>
+                            <li><strong>状态管理</strong>：视频处理状态跟踪</li>
+                            <li><strong>回调处理</strong>：MPS处理完成回调</li>
+                            <li><strong>元数据存储</strong>：视频信息数据库记录</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="api-endpoint">
+                    <span class="method">POST</span> <span class="url">/api/v1/videos/upload-credential</span><br>
+                    // 获取上传凭证
+                </div>
+                <div class="api-endpoint">
+                    <span class="method">POST</span> <span class="url">/api/v1/videos/upload-complete</span><br>
+                    // 通知上传完成
+                </div>
+            </div>
+
+            <!-- 媒体处理流程 -->
+            <div class="section">
+                <h2>⚙️ 媒体处理流程</h2>
+                
+                <div class="flow-step" data-step="1">
+                    <h5>自适应码流配置</h5>
+                    <ul>
+                        <li>预设转码模板：480p、720p、1080p、4K</li>
+                        <li>自适应码流模板：HLS、DASH格式</li>
+                        <li>音频处理：AAC编码，多码率</li>
+                        <li>缩略图生成：多时间点截图</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-step" data-step="2">
+                    <h5>MPS处理任务</h5>
+                    <ul>
+                        <li>AdaptiveDynamicStreamingTask：自适应流任务</li>
+                        <li>SnapshotByTimeOffsetTask：缩略图任务</li>
+                        <li>AnimatedGraphicsTask：GIF预览任务（可选）</li>
+                        <li>输出路径规范：./adaptive_dynamic_streaming/</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-step" data-step="3">
+                    <h5>处理结果回调</h5>
+                    <ul>
+                        <li>MPS处理完成后回调业务后端</li>
+                        <li>解析处理结果，提取各分辨率URL</li>
+                        <li>更新数据库中的视频状态和播放信息</li>
+                        <li>推送处理完成通知给iOS客户端</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ 转码任务配置注意事项</h4>
+                    <ul>
+                        <li><strong>Definition</strong>：使用预创建的模板ID，不要在任务中临时创建</li>
+                        <li><strong>OutputObjectPath</strong>：使用相对路径，格式：./adaptive_dynamic_streaming/_manifest.{format}</li>
+                        <li><strong>SubStreamObjectName</strong>：子流文件路径：./adaptive_dynamic_streaming/ssn_{subStreamNumber}.{format}</li>
+                        <li><strong>SegmentObjectName</strong>：分片文件路径：./adaptive_dynamic_streaming/ssn_{subStreamNumber}_{segmentNumber}.{format}</li>
+                        <li><strong>路径规范</strong>：确保路径结构一致，便于CDN缓存和管理</li>
+                    </ul>
+                </div>
+
+                <div class="api-endpoint">
+                    <span class="method">POST</span> <span class="url">/mps/callback</span><br>
+                    // MPS处理完成回调接口
+                </div>
+            </div>
+
+            <!-- 下载播放流程 -->
+            <div class="section">
+                <h2>📥 视频播放流程</h2>
+                
+                <div class="flow-step" data-step="1">
+                    <h5>iOS端请求播放信息</h5>
+                    <ul>
+                        <li>根据视频ID请求播放元数据</li>
+                        <li>获取不同分辨率的播放URL</li>
+                        <li>检查视频处理状态</li>
+                        <li>获取用户播放历史和偏好设置</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-step" data-step="2">
+                    <h5>后端返回播放信息</h5>
+                    <ul>
+                        <li>查询数据库获取视频元数据</li>
+                        <li>生成CDN加速的播放URL</li>
+                        <li>根据用户网络状况推荐初始分辨率</li>
+                        <li>返回HLS/DASH播放列表URL</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-step" data-step="3">
+                    <h5>iOS端智能播放</h5>
+                    <ul>
+                        <li>AVPlayer加载HLS/DASH流</li>
+                        <li>根据网络状况自动切换分辨率</li>
+                        <li>本地缓存策略：预缓存下一段内容</li>
+                        <li>播放进度实时同步到后端</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-step" data-step="4">
+                    <h5>播放数据分析</h5>
+                    <ul>
+                        <li>播放时长、完播率统计</li>
+                        <li>网络质量和切换频率分析</li>
+                        <li>用户行为数据收集</li>
+                        <li>CDN命中率和加载速度监控</li>
+                    </ul>
+                </div>
+
+                <div class="component-grid">
+                    <div class="component-item">
+                        <h5>🎯 自适应播放策略</h5>
+                        <ul>
+                            <li>WiFi环境：优先高清</li>
+                            <li>移动网络：智能降级</li>
+                            <li>弱网环境：最低画质保证流畅</li>
+                            <li>用户手动选择：记住偏好</li>
+                        </ul>
+                    </div>
+                    <div class="component-item">
+                        <h5>💾 缓存策略</h5>
+                        <ul>
+                            <li>播放列表缓存：本地存储M3U8</li>
+                            <li>视频片段缓存：LRU策略管理</li>
+                            <li>缩略图缓存：用户界面优化</li>
+                            <li>元数据缓存：减少网络请求</li>
+                        </ul>
+                    </div>
+                    <div class="component-item">
+                        <h5>📊 质量监控</h5>
+                        <ul>
+                            <li>首帧时间：视频开始播放延迟</li>
+                            <li>卡顿率：播放过程中的中断</li>
+                            <li>分辨率分布：用户观看清晰度</li>
+                            <li>CDN性能：不同节点响应时间</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="api-endpoint">
+                    <span class="method">GET</span> <span class="url">/api/v1/videos/{id}/play-info</span><br>
+                    // 获取视频播放信息
+                </div>
+                <div class="api-endpoint">
+                    <span class="method">POST</span> <span class="url">/api/v1/videos/{id}/play-progress</span><br>
+                    // 上报播放进度
+                </div>
+            </div>
+
+            <!-- 安全和权限控制 -->
+            <div class="section">
+                <h2>🔐 安全和权限控制</h2>
+                
+                <div class="component-grid">
+                    <div class="component-item">
+                        <h5>🔑 访问控制</h5>
+                        <ul>
+                            <li><strong>身份认证</strong>：JWT Token验证</li>
+                            <li><strong>权限验证</strong>：基于角色的访问控制</li>
+                            <li><strong>资源隔离</strong>：用户数据完全隔离</li>
+                            <li><strong>API限流</strong>：防止滥用和攻击</li>
+                        </ul>
+                    </div>
+                    <div class="component-item">
+                        <h5>🛡️ 内容安全</h5>
+                        <ul>
+                            <li><strong>内容审核</strong>：上传后自动审核</li>
+                            <li><strong>防盗链</strong>：Referer和时间戳验证</li>
+                            <li><strong>URL签名</strong>：临时访问凭证</li>
+                            <li><strong>地域限制</strong>：根据需要限制访问地区</li>
+                        </ul>
+                    </div>
+                    <div class="component-item">
+                        <h5>📱 客户端安全</h5>
+                        <ul>
+                            <li><strong>证书绑定</strong>：防止中间人攻击</li>
+                            <li><strong>本地加密</strong>：敏感数据加密存储</li>
+                            <li><strong>混淆保护</strong>：代码混淆和反编译保护</li>
+                            <li><strong>运行时保护</strong>：检测调试和Hook</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 性能优化策略 -->
+            <div class="section">
+                <h2>🚀 性能优化策略</h2>
+                
+                <div class="highlight-box">
+                    <h4>端到端性能优化</h4>
+                    <ul>
+                        <li><strong>上传优化</strong>：分片上传、断点续传、并行上传</li>
+                        <li><strong>转码优化</strong>：智能转码参数、GPU加速</li>
+                        <li><strong>分发优化</strong>：CDN预热、智能调度</li>
+                        <li><strong>播放优化</strong>：预加载、自适应码率、本地缓存</li>
+                    </ul>
+                </div>
+
+                <div class="tech-stack">
+                    <div class="tech-column">
+                        <h4>📤 上传性能优化</h4>
+                        <ul>
+                            <li>分片大小动态调整（1MB-10MB）</li>
+                            <li>网络状况监测和自适应</li>
+                            <li>失败重试机制（指数退避）</li>
+                            <li>后台上传支持</li>
+                            <li>压缩前预处理（可选）</li>
+                        </ul>
+                    </div>
+                    <div class="tech-column">
+                        <h4>📱 播放性能优化</h4>
+                        <ul>
+                            <li>预加载策略（30秒缓冲）</li>
+                            <li>智能分辨率切换</li>
+                            <li>本地缓存管理（LRU）</li>
+                            <li>CDN节点优选</li>
+                            <li>播放器资源复用</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 监控和分析 -->
+            <div class="section">
+                <h2>📈 监控和分析</h2>
+                
+                <div class="component-grid">
+                    <div class="component-item">
+                        <h5>📊 业务指标</h5>
+                        <ul>
+                            <li>上传成功率和失败原因</li>
+                            <li>转码成功率和处理时长</li>
+                            <li>播放质量指标（首帧时间、卡顿率）</li>
+                            <li>用户行为分析（观看时长、跳出率）</li>
+                        </ul>
+                    </div>
+                    <div class="component-item">
+                        <h5>🔧 技术指标</h5>
+                        <ul>
+                            <li>API响应时间和错误率</li>
+                            <li>CDN命中率和回源率</li>
+                            <li>存储使用量和成本分析</li>
+                            <li>带宽使用情况和峰值</li>
+                        </ul>
+                    </div>
+                    <div class="component-item">
+                        <h5>⚠️ 异常监控</h5>
+                        <ul>
+                            <li>上传失败实时告警</li>
+                            <li>转码异常自动重试</li>
+                            <li>播放卡顿率过高告警</li>
+                            <li>系统资源使用监控</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 总结和建议 -->
+            <div class="section">
+                <h2>💡 实施建议</h2>
+                
+                <div class="highlight-box">
+                    <h4>关键成功因素</h4>
+                    <ul>
+                        <li><strong>分阶段实施</strong>：先实现基础功能，再逐步优化</li>
+                        <li><strong>充分测试</strong>：不同网络环境和设备的兼容性测试</li>
+                        <li><strong>监控先行</strong>：在功能开发的同时建立监控体系</li>
+                        <li><strong>用户体验</strong>：始终以用户体验为核心进行优化</li>
+                        <li><strong>安全合规</strong>：确保符合相关法规和安全要求</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>风险和挑战</h4>
+                    <ul>
+                        <li><strong>网络环境复杂</strong>：需要充分考虑弱网和移动网络场景</li>
+                        <li><strong>设备兼容性</strong>：不同iOS版本和设备的兼容性问题</li>
+                        <li><strong>成本控制</strong>：转码和CDN成本需要精确计算和控制</li>
+                        <li><strong>用户教育</strong>：需要引导用户理解和接受新的播放体验</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">kylin</div><div class="author-info__description">Make Little Progress Everyday!</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Alenryuichi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Alenryuichi?tab=repositories" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:miaojsi@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://blog.csdn.net/weixin_42157432" target="_blank" title="Blog"><i class="fa-brands fa-blogger"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/06/28/%E6%94%80%E5%B2%A9%E5%8A%9B%E9%87%8F%E8%AE%AD%E7%BB%83%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" title="攀岩力量训练完全指南"><img src="/covers/(6).jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="攀岩力量训练完全指南"/></a><div class="content"><a class="title" href="/2025/06/28/%E6%94%80%E5%B2%A9%E5%8A%9B%E9%87%8F%E8%AE%AD%E7%BB%83%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" title="攀岩力量训练完全指南">攀岩力量训练完全指南</a><time datetime="2025-06-28T03:00:00.000Z" title="发表于 2025-06-28 11:00:00">2025-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/28/Boulder%E6%94%80%E5%B2%A9%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" title="Boulder攀岩入门指南"><img src="/covers/(5).jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Boulder攀岩入门指南"/></a><div class="content"><a class="title" href="/2025/06/28/Boulder%E6%94%80%E5%B2%A9%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" title="Boulder攀岩入门指南">Boulder攀岩入门指南</a><time datetime="2025-06-28T02:30:00.000Z" title="发表于 2025-06-28 10:30:00">2025-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/25/Docker%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" title="Docker开发指南"><img src="/covers/(15).jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker开发指南"/></a><div class="content"><a class="title" href="/2023/03/25/Docker%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" title="Docker开发指南">Docker开发指南</a><time datetime="2023-03-25T14:45:21.000Z" title="发表于 2023-03-25 22:45:21">2023-03-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/24/vscode-docker-wsl-git%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" title="vscode,docker, git协同开发指南"><img src="/covers/(7).jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vscode,docker, git协同开发指南"/></a><div class="content"><a class="title" href="/2023/03/24/vscode-docker-wsl-git%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" title="vscode,docker, git协同开发指南">vscode,docker, git协同开发指南</a><time datetime="2023-03-23T16:00:08.000Z" title="发表于 2023-03-24 00:00:08">2023-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/23/%E9%87%8D%E7%A3%85%E5%8F%91%E5%B8%83github-copilot-x/" title="GitHub Copilot X：AI助力软件开发的未来"><img src="https://github.blog/wp-content/uploads/2023/03/Blog-Bento-Box-Metrics.png?w=1536" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GitHub Copilot X：AI助力软件开发的未来"/></a><div class="content"><a class="title" href="/2023/03/23/%E9%87%8D%E7%A3%85%E5%8F%91%E5%B8%83github-copilot-x/" title="GitHub Copilot X：AI助力软件开发的未来">GitHub Copilot X：AI助力软件开发的未来</a><time datetime="2023-03-23T11:41:53.000Z" title="发表于 2023-03-23 19:41:53">2023-03-23</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/"><span class="card-category-list-name">AI</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/chatgpt/"><span class="card-category-list-name">chatgpt</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/chatgpt/prompt/"><span class="card-category-list-name">prompt</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/copilot/"><span class="card-category-list-name">copilot</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Boulder%E4%B8%93%E5%8C%BA/"><span class="card-category-list-name">Boulder专区</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%81%A5%E8%BA%AB%E6%97%A5%E8%AE%B0/"><span class="card-category-list-name">健身日记</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%8A%80%E6%9C%AF/"><span class="card-category-list-name">博客技术</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E5%88%9D%E7%BA%A7%E6%8C%87%E5%8D%97/"><span class="card-category-list-name">后台开发 - 初级指南</span><span class="card-category-list-count">1</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%81%A5%E8%BA%AB/" style="font-size: 1.45em; color: rgb(13, 29, 130)">健身</a><a href="/tags/Boulder/" style="font-size: 1.25em; color: rgb(15, 75, 28)">Boulder</a><a href="/tags/%E6%94%80%E5%B2%A9/" style="font-size: 1.25em; color: rgb(124, 52, 84)">攀岩</a><a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 1.15em; color: rgb(47, 155, 175)">入门</a><a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 1.15em; color: rgb(101, 134, 126)">运动</a><a href="/tags/Docker/" style="font-size: 1.15em; color: rgb(121, 78, 134)">Docker</a><a href="/tags/Markdown/" style="font-size: 1.35em; color: rgb(199, 62, 35)">Markdown</a><a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 1.15em; color: rgb(102, 178, 158)">AI工具</a><a href="/tags/%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90/" style="font-size: 1.15em; color: rgb(38, 170, 131)">文字生成</a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/" style="font-size: 1.15em; color: rgb(191, 146, 126)">图像生成</a><a href="/tags/%E9%9F%B3%E9%A2%91%E7%94%9F%E6%88%90/" style="font-size: 1.15em; color: rgb(186, 77, 85)">音频生成</a><a href="/tags/OpenAI-chatgpt/" style="font-size: 1.15em; color: rgb(142, 55, 99)">OpenAI-chatgpt</a><a href="/tags/Google-Bert/" style="font-size: 1.15em; color: rgb(139, 152, 200)">Google-Bert</a><a href="/tags/MS-Turing-NLG/" style="font-size: 1.15em; color: rgb(4, 110, 172)">MS-Turing NLG</a><a href="/tags/%E6%96%87%E8%A8%80%E4%B8%80%E5%BF%83/" style="font-size: 1.15em; color: rgb(35, 67, 144)">文言一心</a><a href="/tags/MidJourney/" style="font-size: 1.15em; color: rgb(77, 86, 173)">MidJourney</a><a href="/tags/DALL-E/" style="font-size: 1.15em; color: rgb(50, 73, 111)">DALL-E</a><a href="/tags/StyleGAN/" style="font-size: 1.15em; color: rgb(50, 7, 45)">StyleGAN</a><a href="/tags/WaveNe/" style="font-size: 1.15em; color: rgb(159, 43, 23)">WaveNe</a><a href="/tags/Hexo/" style="font-size: 1.15em; color: rgb(96, 144, 122)">Hexo</a><a href="/tags/chatgpt/" style="font-size: 1.15em; color: rgb(144, 42, 133)">chatgpt</a><a href="/tags/prompt/" style="font-size: 1.15em; color: rgb(120, 14, 200)">prompt</a><a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D/" style="font-size: 1.15em; color: rgb(160, 29, 20)">提示词</a><a href="/tags/%E5%8A%9B%E9%87%8F%E8%AE%AD%E7%BB%83/" style="font-size: 1.15em; color: rgb(3, 119, 164)">力量训练</a><a href="/tags/copilot/" style="font-size: 1.15em; color: rgb(69, 3, 66)">copilot</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/06/"><span class="card-archive-list-date">六月 2025</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">五月 2022</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">四月 2022</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">20</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">30.6k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-06-28T09:01:35.804Z"></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/footer.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2025 By kylin</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://alenryuichi.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'WxiXDuynzRVm4DGKTpdMxRs1-9Nh9j0Va',
+      appKey: 'yGK4vKrga3AEU5e8Uf42dUU8',
+      avatar: 'robohash',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
